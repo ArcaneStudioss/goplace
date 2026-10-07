@@ -6,7 +6,7 @@ export function LaudoFlutuante({ p, itens, className = "" }: { p: Produto; itens
   const b = p.laudo.bateria;
   return (
     <div
-      className={`entra rounded-[18px] bg-superficie/92 p-4 shadow-suave ring-1 ring-linha backdrop-blur-md ${className}`}
+      className={`entra rounded-[18px] bg-superficie/92 text-texto p-4 shadow-suave ring-1 ring-linha backdrop-blur-md ${className}`}
       style={{ "--atraso": "650ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-3">

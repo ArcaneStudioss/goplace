@@ -5,6 +5,7 @@ import { lerConfig } from "@/lib/config";
 import { contagemPorCategoria, destaques } from "@/lib/produtos";
 import { CartaoProduto } from "@/components/site/CartaoProduto";
 import { LaudoFlutuante } from "@/components/site/Laudo";
+import { HeroVideo } from "@/components/site/HeroVideo";
 
 export const dynamic = "force-dynamic";
 
@@ -33,46 +34,29 @@ export default async function Inicio() {
 
   return (
     <>
-      {/* 1. Topo: a promessa da marca + o aparelho com o laudo acontecendo na frente */}
-      <section className="mx-auto max-w-[1240px] px-4 pt-7 sm:px-6 lg:grid lg:min-h-[calc(100dvh-110px)] lg:grid-cols-[1.08fr_1fr] lg:items-center lg:gap-16 lg:pt-6 lg:pb-10">
-        <div>
-          <h1 className="entra max-w-[13ch] text-[40px] leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-[56px] lg:text-[68px]">
-            Você sabe exatamente o que está levando.
-          </h1>
-          <p className="entra mt-5 max-w-[34ch] text-[17px] leading-relaxed text-suave sm:text-[19px]" style={atraso(120)}>
-            iPhones novos e seminovos com laudo aberto, garantia e até {config.parcelasMax}x no cartão.
-          </p>
-          <div className="entra mt-7 flex flex-wrap gap-3" style={atraso(220)}>
-            <Link href="/loja?categoria=iphone" className="btn btn-escuro">
-              Ver iPhones <ArrowRight className="size-4" />
-            </Link>
-            <a href={wpp("Oi, GoPlace! Vim pelo site e queria tirar uma dúvida.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn btn-claro">
-              Falar no WhatsApp
-            </a>
+      {/* 1. Topo em tela cheia: video de fundo (feito das fotos da loja ou o que o cliente enviar no painel),
+          a promessa da marca na frente e o laudo se preenchendo */}
+      <section className="relative isolate -mt-px flex min-h-[calc(100dvh-96px)] items-end overflow-hidden bg-[#0b0c0d] text-white">
+        <HeroVideo proprio={config.videoTopo} posterProprio={config.posterTopo} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/25 lg:bg-gradient-to-r lg:from-black/80 lg:via-black/30 lg:to-transparent" aria-hidden />
+        <div className="relative mx-auto flex w-full max-w-[1240px] flex-col gap-8 px-4 pt-24 pb-10 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:pb-16">
+          <div>
+            <h1 className="entra max-w-[12ch] text-[44px] leading-[1.0] font-semibold tracking-[-0.045em] text-balance sm:text-[64px] lg:text-[84px]">
+              Você sabe exatamente o que está levando.
+            </h1>
+            <p className="entra mt-5 max-w-[34ch] text-[17px] leading-relaxed text-white/80 sm:text-[19px]" style={atraso(120)}>
+              iPhones novos e seminovos com laudo aberto, garantia e até {config.parcelasMax}x no cartão.
+            </p>
+            <div className="entra mt-7 flex flex-wrap gap-3" style={atraso(220)}>
+              <Link href="/loja?categoria=iphone" className="btn bg-white text-[#0b0c0d]">
+                Ver iPhones <ArrowRight className="size-4" />
+              </Link>
+              <a href={wpp("Oi, GoPlace! Vim pelo site e queria tirar uma dúvida.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn bg-white/12 text-white ring-1 ring-white/30 backdrop-blur-md">
+                Falar no WhatsApp
+              </a>
+            </div>
           </div>
-        </div>
-
-        <div className="relative mt-9 pb-24 sm:pb-10 lg:mt-0 lg:pb-0">
-          <div className="palco relative aspect-[4/5] overflow-hidden rounded-cartao bg-superficie-2 sm:aspect-[16/11] lg:aspect-[4/5] lg:max-h-[78dvh] lg:w-full">
-            {config.videoTopo ? (
-              <video
-                className="size-full object-cover"
-                src={config.videoTopo}
-                poster={config.posterTopo ?? "/fotos/iphone-15-pro-1200.webp"}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label="Vídeo da GoPlace"
-              />
-            ) : (
-              <FotoFixa nome="iphone-15-pro" alt="iPhone 15 Pro titânio azul nas mãos, na loja da GoPlace" sizes="(min-width: 1024px) 46vw, 100vw" prioridade />
-            )}
-          </div>
-          {estrela && (
-            <LaudoFlutuante p={estrela} itens={config.laudoItens} className="absolute right-3 bottom-0 left-3 sm:right-6 sm:bottom-6 sm:left-auto sm:w-[310px] lg:-left-10 lg:right-auto lg:bottom-10" />
-          )}
+          {estrela && <LaudoFlutuante p={estrela} itens={config.laudoItens} className="w-full lg:mb-1 lg:w-[320px] lg:shrink-0" />}
         </div>
       </section>
 
