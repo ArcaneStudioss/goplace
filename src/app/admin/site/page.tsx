@@ -25,9 +25,10 @@ export default async function Site() {
           </FormJanela>
         </CartaoConfig>
 
-        <CartaoConfig titulo="Pagamento" icone={<CreditCard className="size-5" />} resumo={<Dados itens={[["Parcelamento máximo", `${c.parcelasMax}x no cartão`], ["Crediário", c.crediario]]} />}>
+        <CartaoConfig titulo="Pagamento e garantia" icone={<CreditCard className="size-5" />} resumo={<Dados itens={[["Parcelamento máximo", `${c.parcelasMax}x no cartão`], ["Garantia", c.garantia], ["Crediário", c.crediario]]} />}>
           <FormJanela acao={salvarPagamento}>
             <Campo rotulo="Parcelamento máximo no cartão" nome="parcelasMax" type="number" min={1} max={24} defaultValue={c.parcelasMax} dica="Aparece no topo do site. As parcelas sem juros de cada produto ficam no cadastro dele." className="sm:col-span-2" />
+            <Campo rotulo="Garantia (aparece no site todo)" nome="garantia" defaultValue={c.garantia} placeholder="6 meses a 1 ano" maxLength={40} dica="Vale quando o produto não tem uma garantia própria. Ex.: 6 meses a 1 ano" className="sm:col-span-2" />
             <div className="sm:col-span-2">
               <label htmlFor="c-crediario" className="rotulo">Texto do crediário GoPlace</label>
               <textarea id="c-crediario" name="crediario" defaultValue={c.crediario} rows={3} maxLength={220} className="campo resize-none" />

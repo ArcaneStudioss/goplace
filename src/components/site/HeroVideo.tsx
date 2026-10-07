@@ -18,7 +18,7 @@ export function HeroVideo({ proprio, posterProprio }: { proprio: string | null; 
     <video
       ref={ref}
       className="absolute inset-0 size-full object-cover"
-      poster={posterProprio ?? "/video/hero-v.jpg"}
+      poster={posterProprio ?? "/video/loja-v.jpg"}
       autoPlay
       muted
       loop
@@ -31,8 +31,8 @@ export function HeroVideo({ proprio, posterProprio }: { proprio: string | null; 
         <source src={proprio} />
       ) : (
         <>
-          <source src="/video/hero-h.mp4" type="video/mp4" media="(min-width: 900px)" />
-          <source src="/video/hero-v.mp4" type="video/mp4" />
+          <source src="/video/loja-h.mp4" type="video/mp4" media="(min-width: 900px)" />
+          <source src="/video/loja-v.mp4" type="video/mp4" />
         </>
       )}
     </video>

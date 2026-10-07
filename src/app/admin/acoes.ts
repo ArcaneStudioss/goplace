@@ -236,7 +236,7 @@ export async function salvarContato(fd: FormData): Promise<R> {
 export async function salvarPagamento(fd: FormData): Promise<R> {
   await exigirAdmin();
   const parcelasMax = Math.min(24, Math.max(1, Number(txt(fd, "parcelasMax")) || 12));
-  await salvarConfig({ parcelasMax, crediario: txt(fd, "crediario", 220) || PADRAO.crediario });
+  await salvarConfig({ parcelasMax, garantia: txt(fd, "garantia", 40) || PADRAO.garantia, crediario: txt(fd, "crediario", 220) || PADRAO.crediario });
   atualizarSite();
   return { ok: true };
 }

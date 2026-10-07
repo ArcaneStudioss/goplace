@@ -58,7 +58,9 @@ export async function listarVitrine(f: FiltroVitrine = {}, limite = 120): Promis
   const params: unknown[] = [];
   const onde = ["p.status in ('disponivel', 'reservado')"];
   if (f.categoria) onde.push(`p.categoria = $${params.push(f.categoria)}`);
-  if (f.condicao) onde.push(`p.condicao = $${params.push(f.condicao)}`);
+  // "seminovo" na vitrine inclui os usados: so ha duas abas (Novos e Seminovos)
+  if (f.condicao === "seminovo") onde.push("p.condicao in ('seminovo', 'usado')");
+  else if (f.condicao) onde.push(`p.condicao = $${params.push(f.condicao)}`);
   if (f.busca) onde.push(`(p.nome ilike $${params.push(`%${f.busca.replace(/[%_\\]/g, "")}%`)} or p.marca ilike $${params.length})`);
   const ordem =
     f.ordem === "menor" ? "p.preco_centavos asc" : f.ordem === "maior" ? "p.preco_centavos desc" : "p.status = 'disponivel' desc, p.destaque desc, p.criado_em desc";
@@ -66,10 +68,11 @@ export async function listarVitrine(f: FiltroVitrine = {}, limite = 120): Promis
   return linhas.map(normalizar);
 }
 
-export async function destaques(limite = 8): Promise<Produto[]> {
+export async function destaques(limite = 8, condicao?: "novo" | "seminovo"): Promise<Produto[]> {
   const db = await banco();
   const linhas = await db.query(
     `select ${CAMPOS} from loja.produtos p where p.status = 'disponivel'
+     ${condicao === "novo" ? "and p.condicao = 'novo'" : condicao === "seminovo" ? "and p.condicao in ('seminovo', 'usado')" : ""}
      order by p.destaque desc, (p.categoria = 'iphone') desc, p.criado_em desc limit ${Number(limite)}`,
   );
   return linhas.map(normalizar);

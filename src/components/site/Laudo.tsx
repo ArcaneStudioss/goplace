@@ -40,13 +40,13 @@ export function LaudoFlutuante({ p, itens, className = "" }: { p: Produto; itens
 }
 
 // Laudo completo da pagina do produto
-export function LaudoProduto({ p, itens }: { p: Produto; itens: string[] }) {
+export function LaudoProduto({ p, itens, garantia }: { p: Produto; itens: string[]; garantia: string }) {
   const l = p.laudo;
   const dados: [string, string][] = [
     ["Armazenamento", l.armazenamento ?? ""],
     ["Cor", l.cor ?? ""],
     ["Estado", l.estado ?? ""],
-    ["Garantia", l.garantia ?? ""],
+    ["Garantia", l.garantia ?? `GoPlace, de ${garantia}`],
     ["Acompanha", l.acompanha ?? ""],
   ].filter(([, v]) => v) as [string, string][];
   const verificados = l.verificados?.length ? l.verificados : p.condicao !== "novo" ? itens : [];

@@ -200,7 +200,7 @@ export function FormProduto({ p, laudoItens }: { p?: Produto; laudoItens: string
             <Campo rotulo="Cor" nome="cor" defaultValue={l.cor} placeholder="Titânio azul" maxLength={40} />
             <Campo rotulo="Saúde da bateria (%)" nome="bateria" type="number" min={1} max={100} defaultValue={l.bateria ?? ""} placeholder="92" />
             <Campo rotulo="Estado" nome="estado" defaultValue={l.estado} placeholder="Marcas mínimas de uso" maxLength={60} />
-            <Campo rotulo="Garantia" nome="garantia" defaultValue={l.garantia} placeholder="3 meses de garantia GoPlace" maxLength={80} />
+            <Campo rotulo="Garantia" nome="garantia" defaultValue={l.garantia} placeholder="Em branco = garantia padrão do site" maxLength={80} />
             <Campo rotulo="Acompanha" nome="acompanha" defaultValue={l.acompanha} placeholder="Cabo USB-C" maxLength={120} />
             {condicao !== "novo" && (
               <fieldset className="sm:col-span-2">

@@ -4,6 +4,8 @@ import { CATEGORIAS, linkWhatsapp } from "@/lib/comum";
 import { lerConfig } from "@/lib/config";
 import { contagemPorCategoria, destaques } from "@/lib/produtos";
 import { CartaoProduto } from "@/components/site/CartaoProduto";
+import { Abas } from "@/components/site/Abas";
+import type { Produto } from "@/lib/produtos";
 import { HeroVideo } from "@/components/site/HeroVideo";
 
 export const dynamic = "force-dynamic";
@@ -26,8 +28,19 @@ function FotoFixa({ nome, alt, sizes, className = "", prioridade = false }: { no
   );
 }
 
+function GradeProdutos({ lista, vazio }: { lista: Produto[]; vazio: string }) {
+  if (!lista.length) return <p className="rounded-cartao bg-superficie px-6 py-10 text-center text-[15px] text-suave ring-1 ring-linha">{vazio}</p>;
+  return (
+    <div className="grid grid-cols-2 gap-x-3 gap-y-9 sm:gap-x-5 lg:grid-cols-4">
+      {lista.map((p, i) => (
+        <CartaoProduto key={p.id} p={p} atraso={(i % 4) * 70} />
+      ))}
+    </div>
+  );
+}
+
 export default async function Inicio() {
-  const [config, vitrine, contagem] = await Promise.all([lerConfig(), destaques(8), contagemPorCategoria()]);
+  const [config, novos, seminovos, contagem] = await Promise.all([lerConfig(), destaques(8, "novo"), destaques(8, "seminovo"), contagemPorCategoria()]);
   const wpp = (t: string) => (config.whatsapp ? linkWhatsapp(config.whatsapp, t) : "/loja");
 
   return (
@@ -36,14 +49,14 @@ export default async function Inicio() {
           a promessa da marca na frente e o laudo se preenchendo */}
       <section className="relative isolate -mt-px flex min-h-[calc(100dvh-96px)] items-end overflow-hidden bg-[#0b0c0d] text-white">
         <HeroVideo proprio={config.videoTopo} posterProprio={config.posterTopo} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/25 lg:bg-gradient-to-r lg:from-black/80 lg:via-black/30 lg:to-transparent" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/40 lg:bg-gradient-to-r lg:from-black/85 lg:via-black/45 lg:to-black/10" aria-hidden />
         <div className="relative mx-auto flex w-full max-w-[1240px] flex-col px-4 pt-24 pb-14 sm:px-6 lg:pb-20">
           <div>
             <h1 className="entra max-w-[12ch] text-[44px] leading-[1.0] font-semibold tracking-[-0.045em] text-balance sm:text-[64px] lg:text-[84px]">
               Você sabe exatamente o que está levando.
             </h1>
             <p className="entra mt-5 max-w-[34ch] text-[17px] leading-relaxed text-white/80 sm:text-[19px]" style={atraso(120)}>
-              iPhones novos e seminovos com laudo aberto, garantia e até {config.parcelasMax}x no cartão.
+              iPhones novos e seminovos, com garantia de {config.garantia} e até {config.parcelasMax}x no cartão.
             </p>
             <div className="entra mt-7 flex flex-wrap gap-3" style={atraso(220)}>
               <Link href="/loja?categoria=iphone" className="btn bg-white text-[#0b0c0d]">
@@ -89,8 +102,8 @@ export default async function Inicio() {
         </div>
       </section>
 
-      {/* 3. Vitrine */}
-      {vitrine.length > 0 && (
+      {/* 3. Vitrine em duas abas: Novos e Seminovos (a loja vende os dois, cada um com a sua garantia e o seu jeito) */}
+      {(novos.length > 0 || seminovos.length > 0) && (
         <section aria-labelledby="t-destaques" className="mx-auto mt-24 max-w-[1240px] px-4 sm:px-6">
           <div className="flex items-end justify-between gap-4">
             <h2 id="t-destaques" className="text-[28px] leading-tight font-semibold tracking-[-0.035em] sm:text-[36px]" data-revelar>
@@ -100,10 +113,13 @@ export default async function Inicio() {
               Ver tudo <ArrowRight className="size-4" />
             </Link>
           </div>
-          <div className="mt-7 grid grid-cols-2 gap-x-3 gap-y-9 sm:gap-x-5 lg:grid-cols-4">
-            {vitrine.map((p, i) => (
-              <CartaoProduto key={p.id} p={p} atraso={(i % 4) * 70} />
-            ))}
+          <div className="mt-6">
+            <Abas
+              abas={[
+                { id: "novos", nome: "Novos", descricao: `Lacrados, com nota fiscal e garantia de ${config.garantia}.`, conteudo: <GradeProdutos lista={novos} vazio="Os novos chegam toda semana. Pergunte pelo WhatsApp." /> },
+                { id: "seminovos", nome: "Seminovos", descricao: `Revisados na loja, com laudo aberto e garantia de ${config.garantia}.`, conteudo: <GradeProdutos lista={seminovos} vazio="Os seminovos entram toda semana. Pergunte pelo WhatsApp." /> },
+              ]}
+            />
           </div>
         </section>
       )}
@@ -116,7 +132,7 @@ export default async function Inicio() {
             Todo seminovo sai daqui com a ficha aberta.
           </h2>
           <p className="mt-5 max-w-[42ch] text-[16.5px] leading-relaxed text-suave" data-revelar>
-            Antes de ir para a vitrine, o aparelho é conferido item por item. A saúde da bateria e o estado ficam escritos na página do produto, para você comparar com calma.
+            Antes de ir para a vitrine, o aparelho é conferido item por item. A saúde da bateria e o estado ficam escritos na página do produto, e todo aparelho sai com garantia de {config.garantia}.
           </p>
         </div>
         <ol className="mt-10 grid gap-2.5 lg:mt-0">

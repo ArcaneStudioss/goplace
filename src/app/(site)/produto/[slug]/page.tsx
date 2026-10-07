@@ -76,11 +76,11 @@ export default async function PaginaProduto({ params }: PageProps<"/produto/[slu
           </div>
 
           <ul className="mt-7 grid gap-3 text-[14px]">
-            <li className="flex gap-3"><ShieldCheck className="size-5 shrink-0 text-acento" strokeWidth={1.8} /><span>{p.laudo.garantia || "Garantia informada no atendimento."}</span></li>
+            <li className="flex gap-3"><ShieldCheck className="size-5 shrink-0 text-acento" strokeWidth={1.8} /><span>{p.laudo.garantia || `Garantia GoPlace de ${config.garantia}.`}</span></li>
             <li className="flex gap-3"><Store className="size-5 shrink-0 text-acento" strokeWidth={1.8} /><span>Retire em Santo Antônio da Patrulha ou Capão da Canoa, ou combine a entrega.</span></li>
           </ul>
 
-          <div className="mt-8"><LaudoProduto p={p} itens={config.laudoItens} /></div>
+          <div className="mt-8"><LaudoProduto p={p} itens={config.laudoItens} garantia={config.garantia} /></div>
 
           {p.descricao && (
             <div className="mt-8">

@@ -11,6 +11,7 @@ export type ConfigSite = {
   whatsapp: string; // so digitos, com DDD
   instagram: string; // @usuario
   parcelasMax: number; // "em ate N vezes no cartao"
+  garantia: string; // "6 meses a 1 ano"
   crediario: string; // texto curto sobre o crediario
   lojas: Loja[];
   vibraUrl: string;
@@ -24,6 +25,7 @@ export const PADRAO: ConfigSite = {
   whatsapp: "",
   instagram: "goplaceoficial",
   parcelasMax: 18,
+  garantia: "6 meses a 1 ano",
   crediario: "Compre no crediário GoPlace, com análise na hora, direto na loja.",
   lojas: [
     { cidade: "Santo Antônio da Patrulha", endereco: "", horario: "", mapa: "" },

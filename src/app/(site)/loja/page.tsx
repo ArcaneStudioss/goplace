@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
-import { CATEGORIAS, CONDICOES, ehCategoria, nomeCategoria } from "@/lib/comum";
+import { CATEGORIAS, ehCategoria, nomeCategoria } from "@/lib/comum";
 import { listarVitrine } from "@/lib/produtos";
 import { CartaoProduto } from "@/components/site/CartaoProduto";
 
@@ -24,7 +24,7 @@ export default async function Loja({ searchParams }: PageProps<"/loja">) {
   const sp = (await searchParams) as Busca;
   const texto = (v: unknown) => (typeof v === "string" ? v : "");
   const categoria = ehCategoria(texto(sp.categoria)) ? texto(sp.categoria) : "";
-  const condicao = CONDICOES.some((c) => c.id === sp.condicao) ? texto(sp.condicao) : "";
+  const condicao = sp.condicao === "novo" || sp.condicao === "seminovo" ? texto(sp.condicao) : "";
   const q = texto(sp.q).trim().slice(0, 60);
   const ordem = ORDENS.some((o) => o.id === sp.ordem) ? texto(sp.ordem) : "";
   const produtos = await listarVitrine({ categoria, condicao, busca: q, ordem: (ordem || "recentes") as "recentes" | "menor" | "maior" });
@@ -62,7 +62,7 @@ export default async function Loja({ searchParams }: PageProps<"/loja">) {
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6">
         <div className="flex gap-1 rounded-full bg-superficie-2 p-1" role="group" aria-label="Condição">
-          {[{ id: "", nome: "Todos" }, ...CONDICOES].map((c) => (
+          {[{ id: "", nome: "Todos" }, { id: "novo", nome: "Novos" }, { id: "seminovo", nome: "Seminovos" }].map((c) => (
             <Link key={c.id} href={url({ condicao: c.id })} aria-current={condicao === c.id ? "true" : undefined} className={`rounded-full px-3.5 py-1.5 text-[13.5px] font-medium transition ${condicao === c.id ? "bg-superficie text-texto shadow-suave" : "text-suave hover:text-texto"}`}>
               {c.nome}
             </Link>

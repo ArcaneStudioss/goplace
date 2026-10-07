@@ -22,14 +22,14 @@ const PRODUTOS: Semente[] = [
     preco: 489900, custo: 410000, parcelas: 12, destaque: true, fotos: ["iphone-15-pro"],
     resumo: "Titânio azul, bateria 92%, com laudo completo.",
     descricao: "Aparelho revisado na loja, com todos os itens do laudo conferidos. Disponível também no crediário GoPlace.",
-    laudo: { armazenamento: "128 GB", cor: "Titânio azul", bateria: 92, estado: "Marcas mínimas de uso", garantia: "3 meses de garantia GoPlace", acompanha: "Cabo USB-C" },
+    laudo: { armazenamento: "128 GB", cor: "Titânio azul", bateria: 92, estado: "Marcas mínimas de uso", acompanha: "Cabo USB-C" },
   },
   {
     slug: "iphone-14-128gb", nome: "iPhone 14 128 GB", categoria: "iphone", marca: "Apple", condicao: "seminovo",
     preco: 299900, custo: 245000, parcelas: 12, destaque: true, estoque: 4, fotos: ["iphone-14-leque"],
     resumo: "Meia-noite, azul, roxo e estelar. Bateria acima de 85%.",
     descricao: "Quatro cores à pronta entrega. Cada aparelho tem o próprio laudo; pergunte pela cor no WhatsApp. Disponível no crediário GoPlace.",
-    laudo: { armazenamento: "128 GB", cor: "4 cores", bateria: 87, estado: "Ótimo estado", garantia: "3 meses de garantia GoPlace", acompanha: "Cabo" },
+    laudo: { armazenamento: "128 GB", cor: "4 cores", bateria: 87, estado: "Ótimo estado", acompanha: "Cabo" },
   },
   {
     slug: "scooter-eletrica-magias-modena-x13", nome: "Scooter elétrica Magias Modena X13", categoria: "mobilidade", marca: "Magias", condicao: "novo",
