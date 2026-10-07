@@ -1,0 +1,44 @@
+{
+  "name": "goplace",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3100",
+    "build": "next build",
+    "start": "node --max-old-space-size=700 node_modules/next/dist/bin/next start -p 8080 -H 0.0.0.0",
+    "lint": "eslint",
+    "test": "vitest run",
+    "db:migrar": "tsx --conditions=react-server scripts/banco.ts migrar",
+    "admin:criar": "tsx --conditions=react-server scripts/banco.ts admin",
+    "empacotar": "node scripts/empacotar.mjs",
+    "backup": "tsx --conditions=react-server scripts/banco.ts backup",
+    "restaurar": "tsx --conditions=react-server scripts/banco.ts restaurar"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "clsx": "^2.1.1",
+    "geist": "^1.4.2",
+    "lucide-react": "^1.48.0",
+    "next": "16.3.6",
+    "postgres": "^3.4.9",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "recharts": "^3.10.1",
+    "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^24.19.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "archiver": "^8.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.6",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.2"
+  }
+}

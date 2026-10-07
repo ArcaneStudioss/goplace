@@ -1,0 +1,269 @@
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Check, MapPin, Scissors } from "lucide-react";
+import { CATEGORIAS, linkWhatsapp } from "@/lib/comum";
+import { lerConfig } from "@/lib/config";
+import { contagemPorCategoria, destaques } from "@/lib/produtos";
+import { CartaoProduto } from "@/components/site/CartaoProduto";
+import { LaudoFlutuante } from "@/components/site/Laudo";
+
+export const dynamic = "force-dynamic";
+
+const atraso = (ms: number) => ({ "--atraso": `${ms}ms` }) as React.CSSProperties;
+
+function FotoFixa({ nome, alt, sizes, className = "", prioridade = false }: { nome: string; alt: string; sizes: string; className?: string; prioridade?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={`/fotos/${nome}-640.webp`}
+      srcSet={`/fotos/${nome}-640.webp 640w, /fotos/${nome}-1200.webp 1200w`}
+      sizes={sizes}
+      alt={alt}
+      loading={prioridade ? "eager" : "lazy"}
+      fetchPriority={prioridade ? "high" : undefined}
+      decoding="async"
+      className={`size-full object-cover ${className}`}
+    />
+  );
+}
+
+export default async function Inicio() {
+  const [config, vitrine, contagem] = await Promise.all([lerConfig(), destaques(8), contagemPorCategoria()]);
+  const estrela = vitrine.find((p) => p.categoria === "iphone" && p.laudo.bateria) ?? vitrine[0];
+  const wpp = (t: string) => (config.whatsapp ? linkWhatsapp(config.whatsapp, t) : "/loja");
+
+  return (
+    <>
+      {/* 1. Topo: a promessa da marca + o aparelho com o laudo acontecendo na frente */}
+      <section className="mx-auto max-w-[1240px] px-4 pt-7 sm:px-6 lg:grid lg:min-h-[calc(100dvh-110px)] lg:grid-cols-[1.08fr_1fr] lg:items-center lg:gap-16 lg:pt-6 lg:pb-10">
+        <div>
+          <h1 className="entra max-w-[13ch] text-[40px] leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-[56px] lg:text-[68px]">
+            Você sabe exatamente o que está levando.
+          </h1>
+          <p className="entra mt-5 max-w-[34ch] text-[17px] leading-relaxed text-suave sm:text-[19px]" style={atraso(120)}>
+            iPhones novos e seminovos com laudo aberto, garantia e até {config.parcelasMax}x no cartão.
+          </p>
+          <div className="entra mt-7 flex flex-wrap gap-3" style={atraso(220)}>
+            <Link href="/loja?categoria=iphone" className="btn btn-escuro">
+              Ver iPhones <ArrowRight className="size-4" />
+            </Link>
+            <a href={wpp("Oi, GoPlace! Vim pelo site e queria tirar uma dúvida.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn btn-claro">
+              Falar no WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div className="relative mt-9 pb-24 sm:pb-10 lg:mt-0 lg:pb-0">
+          <div className="palco relative aspect-[4/5] overflow-hidden rounded-cartao bg-superficie-2 sm:aspect-[16/11] lg:aspect-[4/5] lg:max-h-[78dvh] lg:w-full">
+            {config.videoTopo ? (
+              <video
+                className="size-full object-cover"
+                src={config.videoTopo}
+                poster={config.posterTopo ?? "/fotos/iphone-15-pro-1200.webp"}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Vídeo da GoPlace"
+              />
+            ) : (
+              <FotoFixa nome="iphone-15-pro" alt="iPhone 15 Pro titânio azul nas mãos, na loja da GoPlace" sizes="(min-width: 1024px) 46vw, 100vw" prioridade />
+            )}
+          </div>
+          {estrela && (
+            <LaudoFlutuante p={estrela} itens={config.laudoItens} className="absolute right-3 bottom-0 left-3 sm:right-6 sm:bottom-6 sm:left-auto sm:w-[310px] lg:-left-10 lg:right-auto lg:bottom-10" />
+          )}
+        </div>
+      </section>
+
+      {/* 2. Categorias: trilho no celular, grade no PC */}
+      <section aria-labelledby="t-categorias" className="mt-20 lg:mt-24">
+        <div className="mx-auto flex max-w-[1240px] items-end justify-between gap-4 px-4 sm:px-6">
+          <h2 id="t-categorias" className="text-[28px] leading-tight font-semibold tracking-[-0.035em] sm:text-[36px]" data-revelar>
+            Do iPhone ao drone.
+          </h2>
+          <Link href="/loja" className="hidden shrink-0 items-center gap-1 text-[15px] font-medium text-acento hover:underline sm:inline-flex">
+            Ver tudo <ArrowRight className="size-4" />
+          </Link>
+        </div>
+        <div className="trilho mt-6 lg:mx-auto lg:grid lg:max-w-[1240px] lg:grid-cols-6 lg:gap-4 lg:overflow-visible lg:px-6">
+          {CATEGORIAS.map((c, i) => (
+            <Link
+              key={c.id}
+              href={`/loja?categoria=${c.id}`}
+              className="zoom-foto group relative block aspect-[3/4] w-[46vw] max-w-[230px] overflow-hidden rounded-cartao bg-superficie-2 lg:w-auto lg:max-w-none"
+              data-revelar
+              style={atraso(i * 60)}
+            >
+              <FotoFixa nome={c.foto} alt="" sizes="(min-width: 1024px) 16vw, 46vw" />
+              <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" aria-hidden />
+              <span className="absolute inset-x-0 bottom-0 p-4 text-white">
+                <span className="block text-[17px] leading-tight font-semibold tracking-[-0.02em]">{c.nome}</span>
+                <span className="mt-0.5 block text-[12.5px] text-white/75">
+                  {contagem[c.id] ? `${contagem[c.id]} ${contagem[c.id] === 1 ? "opção" : "opções"}` : "Consulte"}
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. Vitrine */}
+      {vitrine.length > 0 && (
+        <section aria-labelledby="t-destaques" className="mx-auto mt-24 max-w-[1240px] px-4 sm:px-6">
+          <div className="flex items-end justify-between gap-4">
+            <h2 id="t-destaques" className="text-[28px] leading-tight font-semibold tracking-[-0.035em] sm:text-[36px]" data-revelar>
+              Pronta entrega.
+            </h2>
+            <Link href="/loja" className="inline-flex shrink-0 items-center gap-1 text-[15px] font-medium text-acento hover:underline">
+              Ver tudo <ArrowRight className="size-4" />
+            </Link>
+          </div>
+          <div className="mt-7 grid grid-cols-2 gap-x-3 gap-y-9 sm:gap-x-5 lg:grid-cols-4">
+            {vitrine.map((p, i) => (
+              <CartaoProduto key={p.id} p={p} atraso={(i % 4) * 70} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 4. O laudo: a conferencia se marca item a item conforme a pessoa rola */}
+      <section id="laudo" aria-labelledby="t-laudo" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36 lg:grid lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div className="lg:sticky lg:top-32 lg:self-start">
+          <p className="text-[13px] font-semibold tracking-[0.12em] text-acento uppercase" data-revelar>O laudo GoPlace</p>
+          <h2 id="t-laudo" className="mt-3 max-w-[16ch] text-[34px] leading-[1.05] font-semibold tracking-[-0.04em] text-balance sm:text-[46px]" data-revelar>
+            Todo seminovo sai daqui com a ficha aberta.
+          </h2>
+          <p className="mt-5 max-w-[42ch] text-[16.5px] leading-relaxed text-suave" data-revelar>
+            Antes de ir para a vitrine, o aparelho é conferido item por item. A saúde da bateria e o estado ficam escritos na página do produto, para você comparar com calma.
+          </p>
+        </div>
+        <ol className="mt-10 grid gap-2.5 lg:mt-0">
+          {config.laudoItens.map((t, i) => (
+            <li key={t} className="item-laudo flex items-center gap-4 rounded-cartao bg-superficie px-5 py-5 ring-1 ring-linha sm:py-6">
+              <span className="num w-6 font-mono text-[13px] text-suave">{String(i + 1).padStart(2, "0")}</span>
+              <span className="flex-1 text-[17px] font-medium tracking-[-0.01em] sm:text-[19px]">{t}</span>
+              <span className="marca grid size-7 shrink-0 place-items-center rounded-full bg-superficie-2 text-sobre-acento">
+                <Check className="size-4" strokeWidth={3} aria-hidden />
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* 5. Alem do iPhone (bento: 5 itens, 5 celulas) */}
+      <section aria-labelledby="t-mais" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36">
+        <h2 id="t-mais" className="max-w-[18ch] text-[28px] leading-tight font-semibold tracking-[-0.035em] sm:text-[36px]" data-revelar>
+          Além do iPhone, o que acompanha a sua rotina.
+        </h2>
+        <div className="mt-7 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-[300px_300px]">
+          <Link href="/loja?categoria=mobilidade" className="zoom-foto relative col-span-2 aspect-[4/3] overflow-hidden rounded-cartao bg-superficie-2 lg:row-span-2 lg:aspect-auto" data-revelar>
+            <FotoFixa nome="scooter" alt="Scooter elétrica com banco de couro marrom em frente à loja" sizes="(min-width: 1024px) 50vw, 100vw" className="object-[50%_60%]" />
+            <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" aria-hidden />
+            <span className="absolute bottom-0 left-0 p-5 text-white sm:p-7">
+              <span className="block text-[24px] leading-tight font-semibold tracking-[-0.03em] sm:text-[32px]">Mobilidade elétrica</span>
+              <span className="mt-1 block text-[14px] text-white/80">Scooters com garantia e parcelamento em até 24x.</span>
+            </span>
+          </Link>
+          {[
+            { href: "/loja?categoria=cameras", foto: "drone-neo", t: "Drones e câmeras", alt: "Caixa do drone DJI Neo" },
+            { href: "/loja?categoria=audio", foto: "airpods", t: "Áudio", alt: "AirPods com o estojo aberto na mão" },
+            { href: "/loja?categoria=criadores", foto: "osmo-mobile", t: "Para criadores", alt: "Caixa do gimbal DJI Osmo Mobile SE" },
+          ].map((c, i) => (
+            <Link key={c.href} href={c.href} className="zoom-foto relative aspect-square overflow-hidden rounded-cartao bg-superficie-2 lg:aspect-auto" data-revelar style={atraso(80 + i * 70)}>
+              <FotoFixa nome={c.foto} alt={c.alt} sizes="(min-width: 1024px) 25vw, 50vw" />
+              <span className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" aria-hidden />
+              <span className="absolute bottom-0 left-0 p-4 text-[17px] font-semibold tracking-[-0.02em] text-white sm:p-5 sm:text-[20px]">{c.t}</span>
+            </Link>
+          ))}
+          <a
+            href={wpp("Oi! Queria uma película sob medida para o meu celular.")}
+            target={config.whatsapp ? "_blank" : undefined}
+            rel="noopener noreferrer"
+            className="group relative flex aspect-square flex-col justify-between overflow-hidden rounded-cartao bg-acento p-4 text-sobre-acento sm:p-5 lg:aspect-auto"
+            data-revelar
+            style={atraso(290)}
+          >
+            <Scissors className="size-6 transition-transform duration-500 group-hover:-rotate-12" strokeWidth={1.8} />
+            <span>
+              <span className="block text-[17px] leading-tight font-semibold tracking-[-0.02em] sm:text-[20px]">Películas sob medida</span>
+              <span className="mt-1 block text-[13px] leading-snug opacity-85 sm:text-[14px]">Cortadas na hora para qualquer celular.</span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      {/* 6. Pagamento: frase grande, sem enfeite */}
+      <section aria-labelledby="t-pagamento" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36">
+        <div className="border-y border-linha py-14 sm:py-20">
+          <h2 id="t-pagamento" className="max-w-[20ch] text-[38px] leading-[1.04] font-semibold tracking-[-0.045em] text-balance sm:text-[60px] lg:text-[76px]" data-revelar>
+            Até {config.parcelasMax}x no cartão. <span className="text-suave">Ou no crediário GoPlace.</span>
+          </h2>
+          <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between" data-revelar>
+            <p className="max-w-[44ch] text-[16.5px] leading-relaxed text-suave">{config.crediario}</p>
+            <a href={wpp("Oi! Queria saber como funciona o crediário GoPlace.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn btn-escuro self-start sm:self-auto">
+              Consultar o crediário <ArrowUpRight className="size-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Lojas */}
+      <section id="lojas" aria-labelledby="t-lojas" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36 lg:grid lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-16">
+        <div className="zoom-foto aspect-[4/3] overflow-hidden rounded-cartao bg-superficie-2" data-revelar>
+          <FotoFixa nome="scooter-loja" alt="Fachada de vidro da loja GoPlace com scooters elétricas na calçada" sizes="(min-width: 1024px) 54vw, 100vw" />
+        </div>
+        <div className="mt-9 lg:mt-0">
+          <h2 id="t-lojas" className="text-[28px] leading-tight font-semibold tracking-[-0.035em] sm:text-[36px]" data-revelar>
+            Venha ver de perto.
+          </h2>
+          <p className="mt-3 max-w-[40ch] text-[16.5px] leading-relaxed text-suave" data-revelar>
+            Duas lojas no litoral norte gaúcho. Pegue o aparelho na mão antes de decidir.
+          </p>
+          <ul className="mt-7 grid gap-3">
+            {config.lojas.map((l, i) => (
+              <li key={l.cidade} className="rounded-cartao bg-superficie p-5 ring-1 ring-linha" data-revelar style={atraso(i * 90)}>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-[18px] font-semibold tracking-[-0.02em]">{l.cidade}</h3>
+                    <p className="mt-1 text-[14.5px] leading-relaxed text-suave">{l.endereco || "Peça a localização pelo WhatsApp."}</p>
+                    {l.horario && <p className="mt-0.5 text-[14px] text-suave">{l.horario}</p>}
+                  </div>
+                  <MapPin className="size-5 shrink-0 text-acento" strokeWidth={1.8} />
+                </div>
+                {l.mapa && (
+                  <a href={l.mapa} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-[14px] font-medium text-acento hover:underline">
+                    Como chegar <ArrowUpRight className="size-4" />
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 8. Vibra, a operadora do grupo */}
+      <section aria-label="Vibra" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36">
+        <div className="relative overflow-hidden rounded-cartao bg-vibra px-6 py-12 text-white sm:px-12 sm:py-16" data-revelar>
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <span className="logo-vibra block w-[150px] sm:w-[190px]" role="img" aria-label="Vibra" />
+              <p className="mt-5 max-w-[36ch] text-[17px] leading-relaxed text-white/85 sm:text-[19px]">
+                A operadora do grupo GoPlace. Pergunte pelos planos quando passar na loja.
+              </p>
+            </div>
+            {config.vibraUrl ? (
+              <a href={config.vibraUrl} target="_blank" rel="noopener noreferrer" className="btn self-start bg-vibra-agua text-[#1d0a2e] sm:self-auto">
+                Conhecer a Vibra <ArrowUpRight className="size-4" />
+              </a>
+            ) : (
+              <a href={wpp("Oi! Queria saber sobre os planos da Vibra.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn self-start bg-vibra-agua text-[#1d0a2e] sm:self-auto">
+                Saber dos planos <ArrowUpRight className="size-4" />
+              </a>
+            )}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
