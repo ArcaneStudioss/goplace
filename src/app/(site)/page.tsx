@@ -4,7 +4,6 @@ import { CATEGORIAS, linkWhatsapp } from "@/lib/comum";
 import { lerConfig } from "@/lib/config";
 import { contagemPorCategoria, destaques } from "@/lib/produtos";
 import { CartaoProduto } from "@/components/site/CartaoProduto";
-import { LaudoFlutuante } from "@/components/site/Laudo";
 import { HeroVideo } from "@/components/site/HeroVideo";
 
 export const dynamic = "force-dynamic";
@@ -29,7 +28,6 @@ function FotoFixa({ nome, alt, sizes, className = "", prioridade = false }: { no
 
 export default async function Inicio() {
   const [config, vitrine, contagem] = await Promise.all([lerConfig(), destaques(8), contagemPorCategoria()]);
-  const estrela = vitrine.find((p) => p.categoria === "iphone" && p.laudo.bateria) ?? vitrine[0];
   const wpp = (t: string) => (config.whatsapp ? linkWhatsapp(config.whatsapp, t) : "/loja");
 
   return (
@@ -39,7 +37,7 @@ export default async function Inicio() {
       <section className="relative isolate -mt-px flex min-h-[calc(100dvh-96px)] items-end overflow-hidden bg-[#0b0c0d] text-white">
         <HeroVideo proprio={config.videoTopo} posterProprio={config.posterTopo} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/25 lg:bg-gradient-to-r lg:from-black/80 lg:via-black/30 lg:to-transparent" aria-hidden />
-        <div className="relative mx-auto flex w-full max-w-[1240px] flex-col gap-8 px-4 pt-24 pb-10 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:pb-16">
+        <div className="relative mx-auto flex w-full max-w-[1240px] flex-col px-4 pt-24 pb-14 sm:px-6 lg:pb-20">
           <div>
             <h1 className="entra max-w-[12ch] text-[44px] leading-[1.0] font-semibold tracking-[-0.045em] text-balance sm:text-[64px] lg:text-[84px]">
               Você sabe exatamente o que está levando.
@@ -56,7 +54,6 @@ export default async function Inicio() {
               </a>
             </div>
           </div>
-          {estrela && <LaudoFlutuante p={estrela} itens={config.laudoItens} className="w-full lg:mb-1 lg:w-[320px] lg:shrink-0" />}
         </div>
       </section>
 
