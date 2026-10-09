@@ -25,7 +25,7 @@ describe("login do painel", () => {
   });
 
   it("entra com o usuario de teste e cria sessao", async () => {
-    const r = await auth.entrar("admin@goplace.local", "goplace-teste-2026", "ip1");
+    const r = await auth.entrar("admin@demo.local", "demo-teste-2026", "ip1");
     expect(r).toEqual({ ok: true });
     expect(jar.get("gp_sessao")).toBeTruthy();
     const u = await auth.usuarioAtual();
@@ -33,8 +33,8 @@ describe("login do painel", () => {
   });
 
   it("bloqueia depois de muitas senhas erradas", async () => {
-    for (let i = 0; i < 6; i++) expect((await auth.entrar("admin@goplace.local", "errada-" + i, "ip2")).ok).toBe(false);
-    const r = await auth.entrar("admin@goplace.local", "goplace-teste-2026", "ip2");
+    for (let i = 0; i < 6; i++) expect((await auth.entrar("admin@demo.local", "errada-" + i, "ip2")).ok).toBe(false);
+    const r = await auth.entrar("admin@demo.local", "demo-teste-2026", "ip2");
     expect(r.ok).toBe(false);
   });
 

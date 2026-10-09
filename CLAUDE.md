@@ -1,8 +1,8 @@
-# GoPlace · notas para sessões Claude
+# Loja Modelo · notas para sessões Claude
 
 @AGENTS.md
 
-- Cliente da Arcane Studios (dono: Gabriel). Falar em PT-BR. Regras gerais na base `arcane-studios-kb` (CLAUDE.md de lá).
+- Projeto de portfólio da Arcane Studios (dono: Gabriel); sem cliente, marca neutra "Loja Modelo". Falar em PT-BR. Regras gerais na base `arcane-studios-kb` (CLAUDE.md de lá).
 - Next.js 16 (ler `node_modules/next/dist/docs/` antes de usar API nova), React 19, Tailwind 4, Postgres (Supabase) em produção e PGlite local.
 - Banco: `src/lib/db.ts` (mesma interface nos dois), migrações em `db/migrations/*.sql` (rodam sozinhas). Nunca editar migração já aplicada em produção: criar a próxima.
 - Painel: toda página e toda ação chama `exigirEquipe()`/`exigirAdmin()`. Formulários abrem em janela (`components/admin/Janela.tsx`), regra do Gabriel.

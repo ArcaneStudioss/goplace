@@ -26,7 +26,7 @@ export default async function Clientes() {
                 <p className="num text-[15px] font-semibold">{reais(c.total)}</p>
                 <p className="text-[12.5px] text-suave">{c.compras} {c.compras === 1 ? "compra" : "compras"} · {c.pedidos} {c.pedidos === 1 ? "pedido" : "pedidos"}</p>
               </div>
-              <a href={linkWhatsapp(c.whatsapp, `Oi, ${c.nome.split(" ")[0]}! Aqui é da GoPlace.`)} target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp de ${c.nome}`} className="grid size-10 shrink-0 place-items-center rounded-full ring-1 ring-linha hover:bg-superficie-2">
+              <a href={linkWhatsapp(c.whatsapp, `Oi, ${c.nome.split(" ")[0]}! Aqui é da Loja Modelo.`)} target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp de ${c.nome}`} className="grid size-10 shrink-0 place-items-center rounded-full ring-1 ring-linha hover:bg-superficie-2">
                 <MessageCircle className="size-[18px]" />
               </a>
             </li>

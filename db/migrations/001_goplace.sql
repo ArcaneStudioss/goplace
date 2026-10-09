@@ -1,4 +1,4 @@
--- GoPlace: catalogo, pedidos/vendas, painel.
+-- Loja Modelo: catalogo, pedidos/vendas, painel.
 create table if not exists loja.produtos (
   id serial primary key,
   slug text not null unique,

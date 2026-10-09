@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/produto/[slug]">)
   if (!p) return { title: "Produto não encontrado" };
   return {
     title: p.nome,
-    description: p.resumo || `${p.nome} na GoPlace.`,
+    description: p.resumo || `${p.nome} na Loja Modelo.`,
     openGraph: { images: p.fotos[0] ? [p.fotos[0].grande] : undefined },
   };
 }
@@ -32,7 +32,7 @@ export default async function PaginaProduto({ params }: PageProps<"/produto/[slu
 
   const vendido = p.status === "vendido";
   const disponivel = p.status === "disponivel" && p.estoque > 0;
-  const pergunta = `Oi, GoPlace! Tenho interesse no ${p.nome} (${nomeCondicao(p.condicao)}) que vi no site.`;
+  const pergunta = `Oi, Loja Modelo! Tenho interesse no ${p.nome} (${nomeCondicao(p.condicao)}) que vi no site.`;
 
   return (
     <div className="mx-auto max-w-[1240px] px-4 pt-5 sm:px-6 sm:pt-8">
@@ -58,7 +58,7 @@ export default async function PaginaProduto({ params }: PageProps<"/produto/[slu
 
           <div className="entra mt-6" style={{ "--atraso": "140ms" } as React.CSSProperties}>
             {vendido ? <p className="text-[22px] font-semibold">Vendido</p> : <Preco p={p} grande />}
-            {!vendido && <p className="mt-1 text-[14px] text-suave">Ou no crediário GoPlace. Até {config.parcelasMax}x no cartão.</p>}
+            {!vendido && <p className="mt-1 text-[14px] text-suave">Ou no crediário Loja Modelo. Até {config.parcelasMax}x no cartão.</p>}
           </div>
 
           <div className="entra mt-7 grid gap-3" style={{ "--atraso": "180ms" } as React.CSSProperties}>
@@ -76,8 +76,8 @@ export default async function PaginaProduto({ params }: PageProps<"/produto/[slu
           </div>
 
           <ul className="mt-7 grid gap-3 text-[14px]">
-            <li className="flex gap-3"><ShieldCheck className="size-5 shrink-0 text-acento" strokeWidth={1.8} /><span>{p.laudo.garantia || `Garantia GoPlace de ${config.garantia}.`}</span></li>
-            <li className="flex gap-3"><Store className="size-5 shrink-0 text-acento" strokeWidth={1.8} /><span>Retire em Santo Antônio da Patrulha ou Capão da Canoa, ou combine a entrega.</span></li>
+            <li className="flex gap-3"><ShieldCheck className="size-5 shrink-0 text-acento" strokeWidth={1.8} /><span>{p.laudo.garantia || `Garantia Loja Modelo de ${config.garantia}.`}</span></li>
+            <li className="flex gap-3"><Store className="size-5 shrink-0 text-acento" strokeWidth={1.8} /><span>Retire em Cidade Exemplo ou Outra Cidade Exemplo, ou combine a entrega.</span></li>
           </ul>
 
           <div className="mt-8"><LaudoProduto p={p} itens={config.laudoItens} garantia={config.garantia} /></div>

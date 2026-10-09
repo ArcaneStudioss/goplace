@@ -32,7 +32,7 @@ export async function GET(req: Request) {
   return new Response("﻿" + [cab.join(";"), ...corpo].join("\r\n"), {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="goplace-vendas-${p.de}-a-${p.ate}.csv"`,
+      "Content-Disposition": `attachment; filename="vendas-${p.de}-a-${p.ate}.csv"`,
       "Cache-Control": "no-store",
     },
   });

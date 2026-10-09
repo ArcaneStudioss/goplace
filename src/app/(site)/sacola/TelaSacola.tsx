@@ -60,7 +60,7 @@ export function TelaSacola({ parcelasMax }: { parcelasMax: number }) {
             <span className="text-[15px] text-suave">Total</span>
             <span className="num text-[28px] font-semibold tracking-[-0.03em]">{reais(total)}</span>
           </div>
-          <p className="mt-1 text-right text-[13px] text-suave">Pix, cartão em até {parcelasMax}x ou crediário GoPlace</p>
+          <p className="mt-1 text-right text-[13px] text-suave">Pix, cartão em até {parcelasMax}x ou crediário Loja Modelo</p>
 
           <div className="mt-6 grid gap-4">
             <div>
@@ -90,7 +90,7 @@ export function TelaSacola({ parcelasMax }: { parcelasMax: number }) {
                 {PAGAMENTO_SITE.map((k, n) => (
                   <label key={k} className="flex cursor-pointer items-center justify-center rounded-miudo px-2 py-3 text-center text-[13.5px] font-medium ring-1 ring-linha transition has-[:checked]:bg-acento-suave has-[:checked]:text-acento has-[:checked]:ring-acento">
                     <input type="radio" name="pagamento" value={k} defaultChecked={n === 0} className="sr-only" />
-                    {PAGAMENTO[k].replace("Cartão de crédito", "Cartão").replace(" GoPlace", "")}
+                    {PAGAMENTO[k].replace("Cartão de crédito", "Cartão").replace(" Loja Modelo", "")}
                   </label>
                 ))}
               </div>

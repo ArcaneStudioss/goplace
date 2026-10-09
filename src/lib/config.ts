@@ -14,7 +14,7 @@ export type ConfigSite = {
   garantia: string; // "6 meses a 1 ano"
   crediario: string; // texto curto sobre o crediario
   lojas: Loja[];
-  vibraUrl: string;
+  operadoraUrl: string;
   videoTopo: string | null; // URL do video do topo (se vazio, usa a foto)
   posterTopo: string | null;
   laudoItens: string[]; // o que a loja confere em todo seminovo
@@ -23,15 +23,15 @@ export type ConfigSite = {
 
 export const PADRAO: ConfigSite = {
   whatsapp: "",
-  instagram: "goplaceoficial",
+  instagram: "lojamodelo",
   parcelasMax: 18,
   garantia: "6 meses a 1 ano",
-  crediario: "Compre no crediário GoPlace, com análise na hora, direto na loja.",
+  crediario: "Compre no crediário Loja Modelo, com análise na hora, direto na loja.",
   lojas: [
-    { cidade: "Santo Antônio da Patrulha", endereco: "", horario: "", mapa: "" },
-    { cidade: "Capão da Canoa", endereco: "", horario: "", mapa: "" },
+    { cidade: "Cidade Exemplo", endereco: "", horario: "", mapa: "" },
+    { cidade: "Outra Cidade Exemplo", endereco: "", horario: "", mapa: "" },
   ],
-  vibraUrl: "",
+  operadoraUrl: "",
   videoTopo: null,
   posterTopo: null,
   laudoItens: [

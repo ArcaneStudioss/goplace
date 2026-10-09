@@ -226,9 +226,9 @@ export async function salvarContato(fd: FormData): Promise<R> {
   const whatsapp = soDigitos(txt(fd, "whatsapp", 20));
   if (whatsapp && (whatsapp.length < 10 || whatsapp.length > 13)) return { ok: false, erro: "WhatsApp com DDD, só números." };
   const instagram = txt(fd, "instagram", 40).replace(/^@/, "").replace(/[^a-zA-Z0-9._]/g, "");
-  const vibra = txt(fd, "vibraUrl", 300);
-  if (vibra && !/^https:\/\/[^\s]+$/.test(vibra)) return { ok: false, erro: "O link da Vibra precisa começar com https://" };
-  await salvarConfig({ whatsapp, instagram, vibraUrl: vibra });
+  const operadora = txt(fd, "operadoraUrl", 300);
+  if (operadora && !/^https:\/\/[^\s]+$/.test(operadora)) return { ok: false, erro: "O link da Nova Linha precisa começar com https://" };
+  await salvarConfig({ whatsapp, instagram, operadoraUrl: operadora });
   atualizarSite();
   return { ok: true };
 }

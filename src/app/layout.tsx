@@ -7,10 +7,10 @@ const SITE = (process.env.SITE_URL || "http://localhost:3100").replace(/\/+$/, "
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
-  title: { default: "GoPlace · iPhones novos e seminovos com laudo", template: "%s · GoPlace" },
+  title: { default: "Loja Modelo · iPhones novos e seminovos com laudo", template: "%s · Loja Modelo" },
   description:
-    "iPhones novos e seminovos com laudo aberto, garantia e parcelamento. Áudio, scooters elétricas, drones e acessórios em Santo Antônio da Patrulha e Capão da Canoa.",
-  openGraph: { type: "website", locale: "pt_BR", siteName: "GoPlace", images: ["/fotos/iphone-15-pro-1200.webp"] },
+    "iPhones novos e seminovos com laudo aberto, garantia e parcelamento. Áudio, scooters elétricas, drones e acessórios em Cidade Exemplo e Outra Cidade Exemplo.",
+  openGraph: { type: "website", locale: "pt_BR", siteName: "Loja Modelo", images: ["/fotos/iphone-15-pro-1200.webp"] },
 };
 
 export const viewport: Viewport = {

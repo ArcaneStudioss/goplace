@@ -62,7 +62,7 @@ export default async function Inicio() {
               <Link href="/loja?categoria=iphone" className="btn bg-white text-[#0b0c0d]">
                 Ver iPhones <ArrowRight className="size-4" />
               </Link>
-              <a href={wpp("Oi, GoPlace! Vim pelo site e queria tirar uma dúvida.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn bg-white/12 text-white ring-1 ring-white/30 backdrop-blur-md">
+              <a href={wpp("Oi, Loja Modelo! Vim pelo site e queria tirar uma dúvida.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn bg-white/12 text-white ring-1 ring-white/30 backdrop-blur-md">
                 Falar no WhatsApp
               </a>
             </div>
@@ -127,7 +127,7 @@ export default async function Inicio() {
       {/* 4. O laudo: a conferencia se marca item a item conforme a pessoa rola */}
       <section id="laudo" aria-labelledby="t-laudo" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36 lg:grid lg:grid-cols-[1fr_1fr] lg:gap-20">
         <div className="lg:sticky lg:top-32 lg:self-start">
-          <p className="text-[13px] font-semibold tracking-[0.12em] text-acento uppercase" data-revelar>O laudo GoPlace</p>
+          <p className="text-[13px] font-semibold tracking-[0.12em] text-acento uppercase" data-revelar>O laudo Loja Modelo</p>
           <h2 id="t-laudo" className="mt-3 max-w-[16ch] text-[34px] leading-[1.05] font-semibold tracking-[-0.04em] text-balance sm:text-[46px]" data-revelar>
             Todo seminovo sai daqui com a ficha aberta.
           </h2>
@@ -194,11 +194,11 @@ export default async function Inicio() {
       <section aria-labelledby="t-pagamento" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36">
         <div className="border-y border-linha py-14 sm:py-20">
           <h2 id="t-pagamento" className="max-w-[20ch] text-[38px] leading-[1.04] font-semibold tracking-[-0.045em] text-balance sm:text-[60px] lg:text-[76px]" data-revelar>
-            Até {config.parcelasMax}x no cartão. <span className="text-suave">Ou no crediário GoPlace.</span>
+            Até {config.parcelasMax}x no cartão. <span className="text-suave">Ou no crediário Loja Modelo.</span>
           </h2>
           <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between" data-revelar>
             <p className="max-w-[44ch] text-[16.5px] leading-relaxed text-suave">{config.crediario}</p>
-            <a href={wpp("Oi! Queria saber como funciona o crediário GoPlace.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn btn-escuro self-start sm:self-auto">
+            <a href={wpp("Oi! Queria saber como funciona o crediário Loja Modelo.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn btn-escuro self-start sm:self-auto">
               Consultar o crediário <ArrowUpRight className="size-4" />
             </a>
           </div>
@@ -208,7 +208,7 @@ export default async function Inicio() {
       {/* 7. Lojas */}
       <section id="lojas" aria-labelledby="t-lojas" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36 lg:grid lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-16">
         <div className="zoom-foto aspect-[4/3] overflow-hidden rounded-cartao bg-superficie-2" data-revelar>
-          <FotoFixa nome="scooter-loja" alt="Fachada de vidro da loja GoPlace com scooters elétricas na calçada" sizes="(min-width: 1024px) 54vw, 100vw" />
+          <FotoFixa nome="scooter-loja" alt="Fachada de vidro da loja Loja Modelo com scooters elétricas na calçada" sizes="(min-width: 1024px) 54vw, 100vw" />
         </div>
         <div className="mt-9 lg:mt-0">
           <h2 id="t-lojas" className="text-[28px] leading-tight font-semibold tracking-[-0.035em] sm:text-[36px]" data-revelar>
@@ -239,22 +239,22 @@ export default async function Inicio() {
         </div>
       </section>
 
-      {/* 8. Vibra, a operadora do grupo */}
-      <section aria-label="Vibra" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36">
-        <div className="relative overflow-hidden rounded-cartao bg-vibra px-6 py-12 text-white sm:px-12 sm:py-16" data-revelar>
+      {/* 8. Nova Linha, a operadora do grupo */}
+      <section aria-label="Nova Linha" className="mx-auto mt-28 max-w-[1240px] px-4 sm:px-6 lg:mt-36">
+        <div className="relative overflow-hidden rounded-cartao bg-operadora px-6 py-12 text-white sm:px-12 sm:py-16" data-revelar>
           <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <span className="logo-vibra block w-[150px] sm:w-[190px]" role="img" aria-label="Vibra" />
+              <span className="logo-operadora block w-[150px] sm:w-[190px]" role="img" aria-label="Nova Linha" />
               <p className="mt-5 max-w-[36ch] text-[17px] leading-relaxed text-white/85 sm:text-[19px]">
-                A operadora do grupo GoPlace. Pergunte pelos planos quando passar na loja.
+                A operadora do grupo Loja Modelo. Pergunte pelos planos quando passar na loja.
               </p>
             </div>
-            {config.vibraUrl ? (
-              <a href={config.vibraUrl} target="_blank" rel="noopener noreferrer" className="btn self-start bg-vibra-agua text-[#1d0a2e] sm:self-auto">
-                Conhecer a Vibra <ArrowUpRight className="size-4" />
+            {config.operadoraUrl ? (
+              <a href={config.operadoraUrl} target="_blank" rel="noopener noreferrer" className="btn self-start bg-operadora-agua text-[#1d0a2e] sm:self-auto">
+                Conhecer a Nova Linha <ArrowUpRight className="size-4" />
               </a>
             ) : (
-              <a href={wpp("Oi! Queria saber sobre os planos da Vibra.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn self-start bg-vibra-agua text-[#1d0a2e] sm:self-auto">
+              <a href={wpp("Oi! Queria saber sobre os planos da Nova Linha.")} target={config.whatsapp ? "_blank" : undefined} rel="noopener noreferrer" className="btn self-start bg-operadora-agua text-[#1d0a2e] sm:self-auto">
                 Saber dos planos <ArrowUpRight className="size-4" />
               </a>
             )}

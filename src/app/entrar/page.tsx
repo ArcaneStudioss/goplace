@@ -12,7 +12,7 @@ export default async function Entrar() {
       <div className="entra w-full max-w-[380px]">
         <div className="flex items-center gap-2.5">
           <span className="simbolo size-8" aria-hidden />
-          <span className="text-[22px] font-semibold tracking-[-0.03em]">GoPlace</span>
+          <span className="text-[22px] font-semibold tracking-[-0.03em]">Loja Modelo</span>
           <span className="ml-1 rounded-full bg-superficie-2 px-2.5 py-0.5 text-[12px] font-semibold text-suave">Painel</span>
         </div>
         <h1 className="mt-8 text-[28px] font-semibold tracking-[-0.035em]">Entrar</h1>

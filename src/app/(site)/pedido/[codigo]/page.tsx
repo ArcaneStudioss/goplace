@@ -17,7 +17,7 @@ export default async function PaginaPedido({ params, searchParams }: PageProps<"
   if (!pedido || pedido.origem !== "site") notFound();
   const primeiroNome = pedido.nome.split(" ")[0];
   const msg = [
-    `Oi, GoPlace! Fiz o pedido ${pedido.codigo} pelo site.`,
+    `Oi, Loja Modelo! Fiz o pedido ${pedido.codigo} pelo site.`,
     ...pedido.itens.map((i) => `- ${i.quantidade}x ${i.nome}`),
     `Total: ${reais(pedido.total)}`,
     `Pagamento: ${PAGAMENTO[pedido.pagamento]}`,

@@ -3,7 +3,7 @@
 //   --producao  le .env.production.local em vez de .env.local
 //   admin:criar email "Nome"          (a senha vem de ADMIN_SENHA no ambiente, nunca na linha de comando)
 //   backup                            faz o backup agora e envia para o BACKUP_S3_*
-//   restaurar <arquivo.gpbak | goplace/diario-3.gpbak>   restaura num banco VAZIO (pede BACKUP_CHAVE)
+//   restaurar <arquivo.gpbak | loja/diario-3.gpbak>   restaura num banco VAZIO (pede BACKUP_CHAVE)
 import fs from "node:fs";
 import path from "node:path";
 
@@ -45,7 +45,7 @@ async function main() {
     console.log(await fazerBackup(db));
   } else if (cmd === "restaurar") {
     const bk = await import("../src/lib/backup");
-    if (!a1) throw new Error("uso: npm run restaurar -- <arquivo.gpbak | goplace/diario-N.gpbak>");
+    if (!a1) throw new Error("uso: npm run restaurar -- <arquivo.gpbak | loja/diario-N.gpbak>");
     const cfg = bk.configS3();
     const arq = fs.existsSync(a1) ? fs.readFileSync(a1) : cfg ? await bk.s3("GET", cfg, a1) : null;
     if (!arq) throw new Error("arquivo nao encontrado (nem local, nem no armazenamento)");

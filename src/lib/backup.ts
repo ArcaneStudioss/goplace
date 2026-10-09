@@ -3,7 +3,7 @@ import zlib from "node:zlib";
 import { promisify } from "node:util";
 import type { Banco } from "./db";
 
-// Backup do banco da GoPlace (playbooks/backup.md, tipo C).
+// Backup do banco da Loja Modelo (playbooks/backup.md, tipo C).
 //  - copia consistente (uma transacao so, leitura repetivel) de todas as tabelas do esquema loja, em JSON
 //  - gzip + AES-256-GCM com a chave BACKUP_CHAVE (base64 de 32 bytes), que fica FORA do servidor tambem
 //  - envia para armazenamento S3 compativel (Cloudflare R2 / Backblaze B2) fora da hospedagem
@@ -44,7 +44,7 @@ export async function empacotar(c: Copia, chave: Buffer): Promise<Buffer> {
 }
 
 export async function desempacotar(arq: Buffer, chave: Buffer): Promise<Copia> {
-  if (!arq.subarray(0, MAGIA.length).equals(MAGIA)) throw new Error("Arquivo não é um backup da GoPlace.");
+  if (!arq.subarray(0, MAGIA.length).equals(MAGIA)) throw new Error("Arquivo não é um backup da Loja Modelo.");
   const iv = arq.subarray(MAGIA.length, MAGIA.length + 12);
   const tag = arq.subarray(arq.length - 16);
   const corpo = arq.subarray(MAGIA.length + 12, arq.length - 16);
@@ -122,7 +122,7 @@ export async function s3(metodo: "PUT" | "GET", cfg: S3, chave: string, corpo?: 
 export function nomesDoDia(d = new Date()): string[] {
   const inicioAno = Date.UTC(d.getUTCFullYear(), 0, 1);
   const semana = Math.floor((d.getTime() - inicioAno) / (7 * 864e5));
-  return [`goplace/diario-${d.getUTCDay()}.gpbak`, `goplace/semanal-${semana % 4}.gpbak`, `goplace/mensal-${String(d.getUTCMonth() + 1).padStart(2, "0")}.gpbak`];
+  return [`loja/diario-${d.getUTCDay()}.gpbak`, `loja/semanal-${semana % 4}.gpbak`, `loja/mensal-${String(d.getUTCMonth() + 1).padStart(2, "0")}.gpbak`];
 }
 
 // Faz o backup completo: exporta, cifra, envia e confere lendo de volta o arquivo diario.

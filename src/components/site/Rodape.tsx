@@ -43,9 +43,9 @@ export function Rodape({ config }: { config: ConfigSite }) {
         </div>
       </div>
       <div className="mx-auto max-w-[1240px] border-t border-linha px-4 py-6 text-[12px] leading-relaxed text-suave sm:px-6">
-        <p>© {ano} GoPlace Phones. Preços e condições podem mudar sem aviso; confirme no atendimento.</p>
+        <p>© {ano} Loja Modelo. Preços e condições podem mudar sem aviso; confirme no atendimento.</p>
         <p className="mt-1.5">
-          Apple, iPhone, AirPods, JBL, DJI, Hollyland e demais marcas citadas pertencem aos seus donos. A GoPlace é uma revenda independente, sem vínculo com os fabricantes.
+          Apple, iPhone, AirPods, JBL, DJI, Hollyland e demais marcas citadas pertencem aos seus donos. A Loja Modelo é uma revenda independente, sem vínculo com os fabricantes.
         </p>
       </div>
     </footer>

@@ -1,4 +1,4 @@
-// Gera goplace-discloud.zip pronto para subir na Discloud (app NOVO; nunca por cima de outro app).
+// Gera loja-modelo-discloud.zip pronto para subir na Discloud (app NOVO; nunca por cima de outro app).
 //   npm run empacotar
 // Confere o .env.production.local, roda o build AQUI (a Discloud com 1 GB nao builda Next) e deixa de fora
 // tudo que e cache/desenvolvimento (node_modules, banco local, .env.local).
@@ -8,7 +8,7 @@ import { execSync } from "node:child_process";
 import { ZipArchive } from "archiver";
 
 const raiz = process.cwd();
-const saida = path.join(raiz, "goplace-discloud.zip");
+const saida = path.join(raiz, "loja-modelo-discloud.zip");
 const envArq = path.join(raiz, ".env.production.local");
 if (!fs.existsSync(envArq)) {
   console.error("Faltou o arquivo .env.production.local (valores de producao). Veja .env.example.");

@@ -10,7 +10,7 @@ export function LaudoFlutuante({ p, itens, className = "" }: { p: Produto; itens
       style={{ "--atraso": "650ms" } as React.CSSProperties}
     >
       <div className="flex items-center justify-between gap-3">
-        <span className="text-[12px] font-medium text-suave">Laudo GoPlace</span>
+        <span className="text-[12px] font-medium text-suave">Laudo Loja Modelo</span>
         <span className="selo selo-acento"><Check className="size-3.5" strokeWidth={2.6} /> Conferido</span>
       </div>
       <p className="mt-1.5 text-[15px] font-semibold tracking-[-0.01em]">
@@ -46,7 +46,7 @@ export function LaudoProduto({ p, itens, garantia }: { p: Produto; itens: string
     ["Armazenamento", l.armazenamento ?? ""],
     ["Cor", l.cor ?? ""],
     ["Estado", l.estado ?? ""],
-    ["Garantia", l.garantia ?? `GoPlace, de ${garantia}`],
+    ["Garantia", l.garantia ?? `Loja Modelo, de ${garantia}`],
     ["Acompanha", l.acompanha ?? ""],
   ].filter(([, v]) => v) as [string, string][];
   const verificados = l.verificados?.length ? l.verificados : p.condicao !== "novo" ? itens : [];

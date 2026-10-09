@@ -38,8 +38,8 @@ export const STATUS_PEDIDO = {
 export type StatusPedido = keyof typeof STATUS_PEDIDO;
 
 export const RECEBIMENTO = {
-  retirada_sap: "Retirar em Santo Antônio da Patrulha",
-  retirada_capao: "Retirar em Capão da Canoa",
+  retirada_sap: "Retirar em Cidade Exemplo",
+  retirada_capao: "Retirar em Outra Cidade Exemplo",
   entrega: "Entrega (combinar pelo WhatsApp)",
 } as const;
 export type Recebimento = keyof typeof RECEBIMENTO;
@@ -47,7 +47,7 @@ export type Recebimento = keyof typeof RECEBIMENTO;
 export const PAGAMENTO = {
   pix: "Pix",
   cartao: "Cartão de crédito",
-  crediario: "Crediário GoPlace",
+  crediario: "Crediário Loja Modelo",
   dinheiro: "Dinheiro",
   debito: "Cartão de débito",
 } as const;
@@ -61,7 +61,7 @@ export type Laudo = {
   cor?: string;
   bateria?: number | null; // saude da bateria em %
   estado?: string; // "Impecável", "Marcas leves"...
-  garantia?: string; // "3 meses de garantia GoPlace"
+  garantia?: string; // "3 meses de garantia Loja Modelo"
   acompanha?: string;
   verificados?: string[]; // itens conferidos no aparelho
 };

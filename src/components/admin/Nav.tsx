@@ -76,7 +76,7 @@ export function NavAdmin({ novos, admin, nome, sair }: { novos: number; admin: b
   const marca = (
     <Link href="/admin" className="flex items-center gap-2">
       <span className="simbolo size-6" aria-hidden />
-      <span className="text-[17px] font-semibold tracking-[-0.03em]">GoPlace</span>
+      <span className="text-[17px] font-semibold tracking-[-0.03em]">Loja Modelo</span>
     </Link>
   );
 

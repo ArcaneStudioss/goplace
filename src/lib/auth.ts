@@ -37,7 +37,7 @@ export async function conferirSenha(senha: string, guardado: string) {
 // hash de uma senha qualquer: comparar com ele quando o e-mail nao existe gasta o mesmo tempo
 let hashFalso: Promise<string> | null = null;
 
-const COMUNS = /^(0123456789|1234567890|9876543210|senha|password|qwerty|abcdef|goplace|iphone)/i;
+const COMUNS = /^(0123456789|1234567890|9876543210|senha|password|qwerty|abcdef|demo|iphone)/i;
 export function senhaFraca(senha: string, email = "", nome = ""): string | null {
   if (senha.length < 10) return "A senha precisa de pelo menos 10 caracteres.";
   if (/^(.)\1+$/.test(senha) || COMUNS.test(senha) || new Set(senha).size < 5) return "Essa senha é fácil demais de adivinhar.";

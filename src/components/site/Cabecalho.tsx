@@ -11,7 +11,7 @@ export function Marca({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <span className="simbolo size-[26px]" aria-hidden />
-      <span className="text-[19px] font-semibold tracking-[-0.03em]">GoPlace</span>
+      <span className="text-[19px] font-semibold tracking-[-0.03em]">Loja Modelo</span>
     </span>
   );
 }
@@ -44,7 +44,7 @@ export function Cabecalho({ whatsapp }: { whatsapp: string }) {
   return (
     <header className="sticky top-0 z-40 border-b border-linha bg-fundo/80 backdrop-blur-xl backdrop-saturate-150">
       <div className="mx-auto flex h-[60px] max-w-[1240px] items-center justify-between gap-4 px-4 sm:px-6 lg:h-[68px]">
-        <Link href="/" aria-label="GoPlace, página inicial" className="shrink-0">
+        <Link href="/" aria-label="Loja Modelo, página inicial" className="shrink-0">
           <Marca />
         </Link>
         <nav aria-label="Categorias" className="hidden items-center gap-1 lg:flex">
@@ -89,7 +89,7 @@ export function Cabecalho({ whatsapp }: { whatsapp: string }) {
           </nav>
           <div className="mt-auto grid gap-3">
             {whatsapp && (
-              <a href={linkWhatsapp(whatsapp, "Oi, GoPlace! Vim pelo site.")} target="_blank" rel="noopener noreferrer" className="btn btn-escuro w-full">
+              <a href={linkWhatsapp(whatsapp, "Oi, Loja Modelo! Vim pelo site.")} target="_blank" rel="noopener noreferrer" className="btn btn-escuro w-full">
                 Falar no WhatsApp
               </a>
             )}

@@ -4,7 +4,7 @@ import { exigirEquipe, sair } from "@/lib/auth";
 import { contarPorStatus } from "@/lib/pedidos";
 import { NavAdmin } from "@/components/admin/Nav";
 
-export const metadata: Metadata = { title: { default: "Painel", template: "%s · Painel GoPlace" }, robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: { default: "Painel", template: "%s · Painel Loja Modelo" }, robots: { index: false, follow: false } };
 
 async function acaoSair() {
   "use server";

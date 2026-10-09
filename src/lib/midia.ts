@@ -12,7 +12,7 @@ import path from "node:path";
 const LOCAL = path.join(process.cwd(), ".dados", "midia");
 const supa = () =>
   process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY
-    ? { url: process.env.SUPABASE_URL.replace(/\/+$/, ""), chave: process.env.SUPABASE_SERVICE_KEY, balde: process.env.SUPABASE_BUCKET || "goplace" }
+    ? { url: process.env.SUPABASE_URL.replace(/\/+$/, ""), chave: process.env.SUPABASE_SERVICE_KEY, balde: process.env.SUPABASE_BUCKET || "loja-modelo" }
     : null;
 
 export const TIPOS = { webp: "image/webp", jpg: "image/jpeg", mp4: "video/mp4", webm: "video/webm" } as const;

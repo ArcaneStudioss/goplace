@@ -6,7 +6,7 @@ import { headers } from "next/headers";
 // (o ultimo e o que o proxy da hospedagem acrescenta; o primeiro o visitante pode forjar).
 export function hashIp(ip: string | null | undefined): string | null {
   if (!ip) return null;
-  const chave = process.env.SESSION_SECRET || "dev-goplace-nao-use-em-producao";
+  const chave = process.env.SESSION_SECRET || "dev-demo-nao-use-em-producao";
   return crypto.createHmac("sha256", chave).update(ip.trim()).digest("hex").slice(0, 32);
 }
 

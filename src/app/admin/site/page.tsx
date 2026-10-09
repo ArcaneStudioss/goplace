@@ -17,11 +17,11 @@ export default async function Site() {
     <div className="mx-auto max-w-[1000px]">
       <Titulo titulo="Site" sub="O que aparece para quem visita a loja online." />
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        <CartaoConfig titulo="Contato" icone={<Phone className="size-5" />} resumo={<Dados itens={[["WhatsApp", c.whatsapp ? formatarTelefone(c.whatsapp) : ""], ["Instagram", c.instagram ? `@${c.instagram}` : ""], ["Link da Vibra", c.vibraUrl]]} />}>
+        <CartaoConfig titulo="Contato" icone={<Phone className="size-5" />} resumo={<Dados itens={[["WhatsApp", c.whatsapp ? formatarTelefone(c.whatsapp) : ""], ["Instagram", c.instagram ? `@${c.instagram}` : ""], ["Link da Nova Linha", c.operadoraUrl]]} />}>
           <FormJanela acao={salvarContato}>
             <Campo rotulo="WhatsApp da loja (com DDD)" nome="whatsapp" type="tel" inputMode="tel" defaultValue={c.whatsapp} placeholder="51 99999-9999" dica="Recebe os pedidos do site." />
-            <Campo rotulo="Instagram" nome="instagram" defaultValue={c.instagram} placeholder="goplaceoficial" />
-            <Campo rotulo="Site ou Instagram da Vibra" nome="vibraUrl" type="url" defaultValue={c.vibraUrl} placeholder="https://..." className="sm:col-span-2" />
+            <Campo rotulo="Instagram" nome="instagram" defaultValue={c.instagram} placeholder="lojamodelo" />
+            <Campo rotulo="Site ou Instagram da Nova Linha" nome="operadoraUrl" type="url" defaultValue={c.operadoraUrl} placeholder="https://..." className="sm:col-span-2" />
           </FormJanela>
         </CartaoConfig>
 
@@ -30,7 +30,7 @@ export default async function Site() {
             <Campo rotulo="Parcelamento máximo no cartão" nome="parcelasMax" type="number" min={1} max={24} defaultValue={c.parcelasMax} dica="Aparece no topo do site. As parcelas sem juros de cada produto ficam no cadastro dele." className="sm:col-span-2" />
             <Campo rotulo="Garantia (aparece no site todo)" nome="garantia" defaultValue={c.garantia} placeholder="6 meses a 1 ano" maxLength={40} dica="Vale quando o produto não tem uma garantia própria. Ex.: 6 meses a 1 ano" className="sm:col-span-2" />
             <div className="sm:col-span-2">
-              <label htmlFor="c-crediario" className="rotulo">Texto do crediário GoPlace</label>
+              <label htmlFor="c-crediario" className="rotulo">Texto do crediário Loja Modelo</label>
               <textarea id="c-crediario" name="crediario" defaultValue={c.crediario} rows={3} maxLength={220} className="campo resize-none" />
             </div>
           </FormJanela>

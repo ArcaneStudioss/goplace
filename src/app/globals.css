@@ -18,8 +18,8 @@
   --sobre-inverso: #f3f4f5;
   --sombra: 0 1px 2px rgb(18 19 21 / 0.04), 0 12px 40px -12px rgb(18 19 21 / 0.14);
   --raio: 22px;
-  --vibra: #501a7a;
-  --vibra-agua: #9aead5;
+  --operadora: #501a7a;
+  --operadora-agua: #9aead5;
   color-scheme: light;
 }
 :root[data-tema="escuro"] {
@@ -50,8 +50,8 @@
   --color-sobre-acento: var(--sobre-acento);
   --color-inverso: var(--inverso);
   --color-sobre-inverso: var(--sobre-inverso);
-  --color-vibra: var(--vibra);
-  --color-vibra-agua: var(--vibra-agua);
+  --color-operadora: var(--operadora);
+  --color-operadora-agua: var(--operadora-agua);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --radius-cartao: var(--raio);
@@ -148,9 +148,9 @@ select.campo {
 }
 .selo-acento { background: var(--acento-suave); color: var(--acento); }
 
-/* simbolo da GoPlace e logo da Vibra: imagem usada como mascara, pinta com a cor do texto */
+/* simbolo da Loja Modelo e logo da Nova Linha: imagem usada como mascara, pinta com a cor do texto */
 .simbolo { display: inline-block; background: currentColor; mask: url("/marca/simbolo.png") center / contain no-repeat; -webkit-mask: url("/marca/simbolo.png") center / contain no-repeat; }
-.logo-vibra { display: inline-block; background: var(--vibra-agua); mask: url("/marca/vibra.png") center / contain no-repeat; -webkit-mask: url("/marca/vibra.png") center / contain no-repeat; aspect-ratio: 167 / 47; }
+.logo-operadora { display: inline-block; background: var(--operadora-agua); mask: url("/marca/operadora.png") center / contain no-repeat; -webkit-mask: url("/marca/operadora.png") center / contain no-repeat; aspect-ratio: 167 / 47; }
 
 /* ---- movimento (com motivo) ---- */
 /* revelar ao entrar na tela: hierarquia de leitura. Sem JS ou com movimento reduzido, tudo aparece parado. */

@@ -3,7 +3,7 @@ import type { Laudo } from "./comum";
 import { gerarHashSenha } from "./auth";
 
 // Catalogo de EXEMPLO para desenvolvimento e para a previa mostrada ao cliente.
-// Fotos sao do Instagram da GoPlace; precos marcados com * vieram dos stories, o resto e exemplo.
+// Loja de demonstracao (portfolio): nomes, fotos e precos abaixo sao ficticios.
 // Todos os produtos entram com exemplo = true (o painel mostra o selo "Exemplo").
 
 const DIM: Record<string, [number, number]> = {
@@ -21,48 +21,48 @@ const PRODUTOS: Semente[] = [
     slug: "iphone-15-pro-128gb-titanio-azul", nome: "iPhone 15 Pro 128 GB", categoria: "iphone", marca: "Apple", condicao: "seminovo",
     preco: 489900, custo: 410000, parcelas: 12, destaque: true, fotos: ["iphone-15-pro"],
     resumo: "Titânio azul, bateria 92%, com laudo completo.",
-    descricao: "Aparelho revisado na loja, com todos os itens do laudo conferidos. Disponível também no crediário GoPlace.",
+    descricao: "Aparelho revisado na loja, com todos os itens do laudo conferidos. Disponível também no crediário Loja Modelo.",
     laudo: { armazenamento: "128 GB", cor: "Titânio azul", bateria: 92, estado: "Marcas mínimas de uso", acompanha: "Cabo USB-C" },
   },
   {
     slug: "iphone-14-128gb", nome: "iPhone 14 128 GB", categoria: "iphone", marca: "Apple", condicao: "seminovo",
     preco: 299900, custo: 245000, parcelas: 12, destaque: true, estoque: 4, fotos: ["iphone-14-leque"],
     resumo: "Meia-noite, azul, roxo e estelar. Bateria acima de 85%.",
-    descricao: "Quatro cores à pronta entrega. Cada aparelho tem o próprio laudo; pergunte pela cor no WhatsApp. Disponível no crediário GoPlace.",
+    descricao: "Quatro cores à pronta entrega. Cada aparelho tem o próprio laudo; pergunte pela cor no WhatsApp. Disponível no crediário Loja Modelo.",
     laudo: { armazenamento: "128 GB", cor: "4 cores", bateria: 87, estado: "Ótimo estado", acompanha: "Cabo" },
   },
   {
-    slug: "scooter-eletrica-magias-modena-x13", nome: "Scooter elétrica Magias Modena X13", categoria: "mobilidade", marca: "Magias", condicao: "novo",
+    slug: "scooter-eletrica-x13", nome: "Scooter elétrica X13", categoria: "mobilidade", marca: "Genérica", condicao: "novo",
     preco: 989000, custo: 760000, parcelas: 12, destaque: true, estoque: 2, fotos: ["scooter", "scooter-loja"],
-    resumo: "R$ 9.890 à vista, 12x sem juros no cartão ou até 24x. Garantia de 1 ano.*",
+    resumo: "Preço de exemplo, em até 12x sem juros. Garantia de 1 ano.",
     descricao: "Pneus largos, banco em couro marrom e farol redondo. Possibilidade de parcelamento em até 24x. Garantia de 1 ano.",
     laudo: { garantia: "1 ano de garantia" },
   },
   {
     slug: "airpods-4", nome: "AirPods 4", categoria: "audio", marca: "Apple", condicao: "novo",
     preco: 189000, custo: 150000, parcelas: 18, destaque: true, estoque: 3, fotos: ["airpods"],
-    resumo: "R$ 1.890 em até 18x sem juros.*",
+    resumo: "R$ 1.890 em até 18x sem juros",
     descricao: "Lacrado, com nota fiscal.",
   },
   {
     slug: "drone-dji-neo", nome: "Drone DJI Neo", categoria: "cameras", marca: "DJI", condicao: "novo",
     preco: 258000, custo: 205000, parcelas: 12, estoque: 2, fotos: ["drone-neo"],
-    resumo: "12x de R$ 215.*", descricao: "Drone compacto que decola da palma da mão e segue você gravando em 4K.",
+    resumo: "12x de R$ 215", descricao: "Drone compacto que decola da palma da mão e segue você gravando em 4K.",
   },
   {
     slug: "gimbal-dji-osmo-mobile-se", nome: "Gimbal DJI Osmo Mobile SE", categoria: "criadores", marca: "DJI", condicao: "novo",
     preco: 114000, custo: 85000, parcelas: 12, estoque: 3, fotos: ["osmo-mobile"],
-    resumo: "12x de R$ 95.*", descricao: "Estabilizador de 3 eixos para celular, dobrável.",
+    resumo: "12x de R$ 95", descricao: "Estabilizador de 3 eixos para celular, dobrável.",
   },
   {
     slug: "microfone-hollyland-lark-m2", nome: "Microfone Hollyland Lark M2", categoria: "criadores", marca: "Hollyland", condicao: "novo",
     preco: 139900, custo: 98000, parcelas: 12, estoque: 4, fotos: ["lark-m2"],
-    resumo: "O microfone de lapela que a gente usa na loja.*", descricao: "Microfone sem fio de lapela, dois transmissores e receptor para celular ou câmera.",
+    resumo: "Microfone de lapela sem fio.", descricao: "Microfone sem fio de lapela, dois transmissores e receptor para celular ou câmera.",
   },
   {
     slug: "fonte-e-cabo-originais-apple", nome: "Fonte + cabo originais Apple", categoria: "acessorios", marca: "Apple", condicao: "novo",
     preco: 35000, custo: 22000, parcelas: 3, estoque: 12, fotos: ["carregadores"],
-    resumo: "Fonte USB-C 20W e cabo, originais.*", descricao: "Carregador original Apple com cabo USB-C.",
+    resumo: "Fonte USB-C 20W e cabo, originais", descricao: "Carregador original Apple com cabo USB-C.",
   },
 ];
 
@@ -85,7 +85,7 @@ export async function semear(db: Banco) {
     // so no banco local: usuario de teste e algumas vendas de exemplo para o painel nao abrir vazio
     if (process.env.NODE_ENV !== "production") {
       await t.query("insert into loja.usuarios (email, nome, senha_hash, papel) values ($1, $2, $3, 'admin') on conflict do nothing", [
-        "admin@goplace.local", "Admin (teste)", await gerarHashSenha("goplace-teste-2026"),
+        "admin@demo.local", "Admin (teste)", await gerarHashSenha("demo-teste-2026"),
       ]);
       const vendas: [string, string, number[], string, number][] = [
         ["Cliente exemplo 1", "51990000001", [3], "pix", 2],

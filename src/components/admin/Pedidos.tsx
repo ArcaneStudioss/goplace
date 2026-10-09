@@ -23,7 +23,7 @@ const PASSOS: Record<StatusPedido, { para: StatusPedido; rotulo: string; forte?:
 function Detalhe({ p }: { p: Pedido }) {
   const [pendente, iniciar] = useTransition();
   const [r, setR] = useState<{ ok: boolean; msg?: string; erro?: string } | null>(null);
-  const msg = `Oi, ${p.nome.split(" ")[0]}! Aqui é da GoPlace, sobre o seu pedido ${p.codigo}.`;
+  const msg = `Oi, ${p.nome.split(" ")[0]}! Aqui é da Loja Modelo, sobre o seu pedido ${p.codigo}.`;
   return (
     <div className="pb-5">
       <div className="flex flex-wrap items-center gap-2">
